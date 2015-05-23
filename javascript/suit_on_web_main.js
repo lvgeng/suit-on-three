@@ -19,7 +19,7 @@ function init() {
 	// scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
 	// world
 	var geometry = new THREE.BoxGeometry( 20,20,20 );
-	var material =  new THREE.MeshLambertMaterial( { color:0xffffff, shading: THREE.FlatShading } );
+	var material =  new THREE.MeshLambertMaterial( { color:0x999999, shading: THREE.FlatShading } );
 
 	for ( var i = 0; i < 500; i ++ ) {
 
@@ -34,15 +34,15 @@ function init() {
 	// lights
 
 	light = new THREE.DirectionalLight( 0xffffff );
-	light.position.set( 1, 1, 1 );
+	light.position.set( 1, 1.5, 2 ).normalize();
 	scene.add( light );
 
-	light = new THREE.DirectionalLight( 0x002288 );
-	light.position.set( -1, -1, -1 );
-	scene.add( light );
+	// light = new THREE.DirectionalLight( 0x002288 );
+	// light.position.set( -1, -1, -1 );
+	// scene.add( light );
 
-	light = new THREE.AmbientLight( 0x222222 );
-	scene.add( light );
+	// light = new THREE.AmbientLight( 0x222222 );
+	// scene.add( light );
 
 	// renderer
 	container_to_render = document.getElementById("container_for_three");
