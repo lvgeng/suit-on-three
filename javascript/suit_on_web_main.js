@@ -37,12 +37,12 @@ function init() {
 	light.position.set( 1, 1.5, 2 ).normalize();
 	scene.add( light );
 
-	// light = new THREE.DirectionalLight( 0x002288 );
-	// light.position.set( -1, -1, -1 );
-	// scene.add( light );
+	light = new THREE.DirectionalLight( 0x0044aa );
+	light.position.set( -1, -1.5, -1.9 );
+	scene.add( light );
 
-	// light = new THREE.AmbientLight( 0x222222 );
-	// scene.add( light );
+	light = new THREE.AmbientLight( 0x222222 );
+	scene.add( light );
 
 	// renderer
 	container_to_render = document.getElementById("container_for_three");
@@ -54,7 +54,7 @@ function init() {
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( canvas_to_render.scrollWidth, canvas_to_render.scrollHeight, false);
 
-	camera = new THREE.PerspectiveCamera( 30, renderer.domElement.width / renderer.domElement.height , 1, 1000 );
+	camera = new THREE.PerspectiveCamera( 30, renderer.domElement.width / renderer.domElement.height , 1, 10000 );
 	camera.position.z = 500;
 
 	controls = new THREE.OrbitControls( camera, renderer.domElement);
