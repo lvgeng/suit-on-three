@@ -1,18 +1,30 @@
-<!DOCTYPE html>
 <html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-<head>
+        <title>Suit on web based on three</title>
 
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Suit on web based on three</title>
+        <link rel="stylesheet" href="styles/style_default.css"></link>
+        <link rel="stylesheet" href="styles/style_of_canvas_for_suit.css"></link>
+    
+        <script src="/threejs/build/three.js"></script>
+        <script src="/threejs/js/controls/OrbitControls.js"></script>
+        <script src="/threejs/js/Detector.js"></script>
+        <script src="/threejs/js/libs/stats.min.js"></script>
 
-</head>
 
-<body>
-    <iframe id="viewer" allowfullscreen="" onmousewheel="" src="suit_on_web.html"></iframe>
-<!--     <div id="suit-display-zone">
-        <iframe id="viewer" allowfullscreen="" onmousewheel="" src="suit_on_web.html"></iframe>
-    </div>
- -->
-</body>
+
+    </head>
+
+    <body>
+        <div id="container_for_three">
+
+            <canvas id="canvas_for_three"></canvas> 
+            <script src="/javascript/suit_on_web_main.js"></script>
+
+            <p><input id="slider slider_for_model" type="range" min="0" max="3" value="1" step="1"/>model</p>
+            <p><input id="slider slider_for_texture" type="range" min="0" max="3" value="1" step="1"/>texture</p>
+        </div>      
+    </body>
+
 </html>

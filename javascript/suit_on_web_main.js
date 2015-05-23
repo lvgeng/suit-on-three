@@ -11,24 +11,14 @@ render();
 function animate() {
 	requestAnimationFrame(animate);
 	controls.update();
-
 }
 
 function init() {
 
-	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
-	camera.position.z = 500;
-
-	controls = new THREE.OrbitControls( camera );
-	controls.damping = 0.2;
-	controls.addEventListener( 'change', render );
-
 	scene = new THREE.Scene();
 	// scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
-
-
 	// world
-	var geometry = new THREE.CylinderGeometry( 0, 10, 30, 6, 1 );
+	var geometry = new THREE.BoxGeometry( 20,20,20 );
 	var material =  new THREE.MeshLambertMaterial( { color:0xffffff, shading: THREE.FlatShading } );
 
 	for ( var i = 0; i < 500; i ++ ) {
@@ -41,8 +31,6 @@ function init() {
 		mesh.matrixAutoUpdate = false;
 		scene.add( mesh );
 	}
-
-
 	// lights
 
 	light = new THREE.DirectionalLight( 0xffffff );
@@ -57,14 +45,21 @@ function init() {
 	scene.add( light );
 
 	// renderer
+	container_to_render = document.getElementById("container_for_three");
+	canvas_to_render = document.getElementById('canvas_for_three');
 
-	renderer = new THREE.WebGLRenderer( { antialias: false } );
-	// renderer.setClearColor( scene.fog.color );
+	renderer = new THREE.WebGLRenderer( { canvas: canvas_to_render, antialias: true } );
+
+	renderer.setClearColor( 0x8888ff );
 	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize( canvas_to_render.scrollWidth, canvas_to_render.scrollHeight, false);
 
-	container = document.getElementById( 'container' );
-	container.appendChild( renderer.domElement );
+	camera = new THREE.PerspectiveCamera( 30, renderer.domElement.width / renderer.domElement.height , 1, 1000 );
+	camera.position.z = 500;
+
+	controls = new THREE.OrbitControls( camera, renderer.domElement);
+	controls.damping = 0.2;
+	controls.addEventListener( 'change', render );
 
 	window.addEventListener( 'resize', onWindowResize, false );
 
@@ -75,13 +70,11 @@ function init() {
 
 function onWindowResize() {
 
-	camera.aspect = window.innerWidth / window.innerHeight;
+	renderer.setSize( canvas_to_render.scrollWidth, canvas_to_render.scrollHeight ,false);
+	camera.aspect = renderer.domElement.width / renderer.domElement.height;
 	camera.updateProjectionMatrix();
 
-	renderer.setSize( window.innerWidth, window.innerHeight );
-
 	render();
-
 }
 
 function render() {
