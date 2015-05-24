@@ -21,29 +21,29 @@ function init() {
 
 
 	var light;
-	scene.add( new THREE.AmbientLight( 0x666666 ) );
+	scene.add( new THREE.AmbientLight( 0xffffff ) );
 
-	light = new THREE.DirectionalLight( 0xdfebff, 1.75 );
-	light.position.set( 50, 200, 100 );
-	light.position.multiplyScalar( 1.3 );
+	// light = new THREE.DirectionalLight( 0xdfebff, 1.75 );
+	// light.position.set( 50, 200, 100 );
+	// light.position.multiplyScalar( 1.3 );
 
-	light.castShadow = true;
-	light.shadowCameraVisible = true;
+	// light.castShadow = true;
+	// light.shadowCameraVisible = true;
 
-	light.shadowMapWidth = 1024;
-	light.shadowMapHeight = 1024;
+	// light.shadowMapWidth = 1024;
+	// light.shadowMapHeight = 1024;
 
-	var d = 300;
+	// var d = 300;
 
-	light.shadowCameraLeft = -d;
-	light.shadowCameraRight = d;
-	light.shadowCameraTop = d;
-	light.shadowCameraBottom = -d;
+	// light.shadowCameraLeft = -d;
+	// light.shadowCameraRight = d;
+	// light.shadowCameraTop = d;
+	// light.shadowCameraBottom = -d;
 
-	light.shadowCameraFar = 1000;
-	light.shadowDarkness = 0.5;
+	// light.shadowCameraFar = 1000;
+	// light.shadowDarkness = 0.5;
 
-	scene.add( light );
+	// scene.add( light );
 
 	var groundTexture = THREE.ImageUtils.loadTexture( "/assets/textures/grasslight-big.jpg" );
 	groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
