@@ -20,8 +20,9 @@ function init() {
 	scene.fog = new THREE.Fog( 0xcce0ff, 50, 500 );
 
 
-	var light;
-	scene.add( new THREE.AmbientLight( 0xffffff ) );
+	var light = new THREE.AmbientLight( 0xffffff );
+	light.name = "ambientlight";
+	scene.add( light );
 
 	// light = new THREE.DirectionalLight( 0xdfebff, 1.75 );
 	// light.position.set( 50, 200, 100 );
@@ -56,6 +57,7 @@ function init() {
 	mesh.position.y = 0;
 	mesh.rotation.x = - Math.PI / 2;
 	mesh.receiveShadow = true;
+	mesh.name = "ground";
 	scene.add( mesh );
 
 
@@ -78,20 +80,24 @@ function init() {
 
 
 	// // model
-	var loader = new THREE.OBJLoader( manager );
+	// var loader = new THREE.OBJLoader( manager );
 
-	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader(manager) );
 
-				var loader = new THREE.OBJMTLLoader();
+				var loader = new THREE.OBJMTLLoader(manager);
 				loader.load( '/assets/models/models_for_test/Lol_Katarina_Default/Lol_Katarina_Default.obj',
 					'/assets/models/models_for_test/Lol_Katarina_Default/Lol_Katarina_Default.mtl',
 					function ( object ) {
 						object.scale.x = 2;
 						object.scale.y = 2;
 						object.scale.z = 2;
+						object.name = "lol";
 						scene.add( object );
 					},
 					onProgress, onError );
+				
+				// to delete a certain model
+				// scene.remove(scene.getObjectByName("lol"))
 
 
 	// renderer
