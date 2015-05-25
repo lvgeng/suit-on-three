@@ -21,13 +21,20 @@
     </head>
 
     <body>
-        <div id="container_for_three">
+        <div id = "container_for_three">
 
-            <canvas id="canvas_for_three"></canvas> 
+            <canvas id = "canvas_for_three"></canvas> 
+            
+
+            <select id = "models_selector" name = "selector_for_models">
+                <option path = "models_for_test/Lol_Katarina_Default/Lol_Katarina_Default" scale = 2 selected="selected">lol</option>
+                <option path = "models_for_test/Gemini/Gemini" scale = 6 >Gemini</option>
+            </select>
+
+            <!-- <p><input id="slider slider_for_model" type="range" min="0" max="3" value="1" step="1"/>model</p>
+            <p><input id="slider slider_for_texture" type="range" min="0" max="3" value="1" step="1"/>texture</p> -->
             <script src="/javascript/suit_on_web_main.js"></script>
 
-            <p><input id="slider slider_for_model" type="range" min="0" max="3" value="1" step="1"/>model</p>
-            <p><input id="slider slider_for_texture" type="range" min="0" max="3" value="1" step="1"/>texture</p>
         </div>      
     </body>
 

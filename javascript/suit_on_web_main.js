@@ -2,6 +2,8 @@ if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 var container, stats;
 
+var modeles_selectbox;
+
 var camera, controls, scene, renderer;
 
 init();
@@ -81,21 +83,61 @@ function init() {
 
 	// // model
 	// var loader = new THREE.OBJLoader( manager );
+	modeles_selectbox = document.getElementById("models_selector");
+	modeles_selectbox.addEventListener("change", function(){
+		var loader = new THREE.OBJMTLLoader(manager);
+		loader.load( '/assets/models/'+modeles_selectbox.selectedOptions[0].getAttribute("path")+'.obj',
+			'/assets/models/'+modeles_selectbox.selectedOptions[0].getAttribute("path")+'.mtl',
+			function ( object ) {
+				object.scale.x = modeles_selectbox.selectedOptions[0].getAttribute("scale");
+				object.scale.y = modeles_selectbox.selectedOptions[0].getAttribute("scale");
+				object.scale.z = modeles_selectbox.selectedOptions[0].getAttribute("scale");
+				object.name = "model_to_show";
+
+				scene.remove(scene.getObjectByName("model_to_show"))				
+				scene.add( object );
+			},
+			onProgress, onError );
+	})
 
 	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader(manager) );
 
-				var loader = new THREE.OBJMTLLoader(manager);
-				loader.load( '/assets/models/models_for_test/Lol_Katarina_Default/Lol_Katarina_Default.obj',
-					'/assets/models/models_for_test/Lol_Katarina_Default/Lol_Katarina_Default.mtl',
-					function ( object ) {
-						object.scale.x = 2;
-						object.scale.y = 2;
-						object.scale.z = 2;
-						object.name = "lol";
-						scene.add( object );
-					},
-					onProgress, onError );
-				
+	var loader = new THREE.OBJMTLLoader(manager);
+	loader.load( '/assets/models/'+modeles_selectbox.selectedOptions[0].getAttribute("path")+'.obj',
+		'/assets/models/'+modeles_selectbox.selectedOptions[0].getAttribute("path")+'.mtl',
+		function ( object ) {
+			object.scale.x = modeles_selectbox.selectedOptions[0].getAttribute("scale");
+			object.scale.y = modeles_selectbox.selectedOptions[0].getAttribute("scale");
+			object.scale.z = modeles_selectbox.selectedOptions[0].getAttribute("scale");
+			object.name = "model_to_show";
+			scene.add( object );
+		},
+		onProgress, onError );
+
+	// var loader = new THREE.OBJMTLLoader(manager);
+	// loader.load( '/assets/models/models_for_test/Lol_Katarina_Default/Lol_Katarina_Default.obj',
+	// 	'/assets/models/models_for_test/Lol_Katarina_Default/Lol_Katarina_Default.mtl',
+	// 	function ( object ) {
+	// 		object.scale.x = 2;
+	// 		object.scale.y = 2;
+	// 		object.scale.z = 2;
+	// 		object.name = "lol";
+	// 		scene.add( object );
+	// 	},
+	// 	onProgress, onError );
+
+	// var loader = new THREE.OBJMTLLoader(manager);
+	// loader.load( '/assets/models/models_for_test/Gemini/Gemini.obj',
+	// 	'/assets/models/models_for_test/Gemini/Gemini.mtl',
+	// 	function ( object ) {
+	// 		object.scale.x = 6;
+	// 		object.scale.y = 6;
+	// 		object.scale.z = 6;
+	// 		object.name = "Gemini";
+	// 		scene.add( object );
+	// 	},
+	// 	onProgress, onError );
+
 				// to delete a certain model
 				// scene.remove(scene.getObjectByName("lol"))
 
