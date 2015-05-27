@@ -17,66 +17,18 @@ function animate() {
 }
 
 function init() {
-
-	scene = new THREE.Scene();
-	scene.fog = new THREE.Fog( 0xcce0ff, 50, 500 );
-
-
-	var light = new THREE.AmbientLight( 0xffffff );
-	light.name = "ambientlight";
-	scene.add( light );
-
-	// light = new THREE.DirectionalLight( 0xdfebff, 1.75 );
-	// light.position.set( 50, 200, 100 );
-	// light.position.multiplyScalar( 1.3 );
-
-	// light.castShadow = true;
-	// light.shadowCameraVisible = true;
-
-	// light.shadowMapWidth = 1024;
-	// light.shadowMapHeight = 1024;
-
-	// var d = 300;
-
-	// light.shadowCameraLeft = -d;
-	// light.shadowCameraRight = d;
-	// light.shadowCameraTop = d;
-	// light.shadowCameraBottom = -d;
-
-	// light.shadowCameraFar = 1000;
-	// light.shadowDarkness = 0.5;
-
-	// scene.add( light );
-
-	var groundTexture = THREE.ImageUtils.loadTexture( "/assets/textures/grasslight-big.jpg" );
-	groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
-	groundTexture.repeat.set( 25, 25 );
-	groundTexture.anisotropy = 16;
-
-	//ground
-	var groundMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, specular: 0x111111, map: groundTexture } );
-	var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 200, 200 ), groundMaterial );
-	mesh.position.y = 0;
-	mesh.rotation.x = - Math.PI / 2;
-	mesh.receiveShadow = true;
-	mesh.name = "ground";
-	scene.add( mesh );
-
+	scene = create_scene_basic();
 
 	var manager = new THREE.LoadingManager();
 	manager.onProgress = function ( item, loaded, total ) {
-
 		console.log( item, loaded, total );
-
 	};
-
 	var onProgress = function ( xhr ) {
 		if ( xhr.lengthComputable ) {
 			var percentComplete = xhr.loaded / xhr.total * 100;
 			console.log( Math.round(percentComplete, 2) + '% downloaded' );
 		}
 	};
-
 	var onError = function ( xhr ) {
 	};
 
@@ -85,71 +37,91 @@ function init() {
 	// var loader = new THREE.OBJLoader( manager );
 	modeles_selectbox = document.getElementById("models_selector");
 	modeles_selectbox.addEventListener("change", function(){
-		var loader = new THREE.OBJMTLLoader(manager);
-		loader.load( '/assets/models/'+modeles_selectbox.selectedOptions[0].getAttribute("path")+'.obj',
-			'/assets/models/'+modeles_selectbox.selectedOptions[0].getAttribute("path")+'.mtl',
-			function ( object ) {
-				object.scale.x = modeles_selectbox.selectedOptions[0].getAttribute("scale");
-				object.scale.y = modeles_selectbox.selectedOptions[0].getAttribute("scale");
-				object.scale.z = modeles_selectbox.selectedOptions[0].getAttribute("scale");
-				object.name = "model_to_show";
+		switch(modeles_selectbox.selectedOptions[0].getAttribute("type")){
+			case "OBJMTL":
+				var loader = new THREE.OBJMTLLoader(manager);
+				loader.load( '/assets/models/'+modeles_selectbox.selectedOptions[0].getAttribute("path")+'.obj',
+					'/assets/models/'+modeles_selectbox.selectedOptions[0].getAttribute("path")+'.mtl',
+					function ( object ) {
+						object.scale.x = modeles_selectbox.selectedOptions[0].getAttribute("scale");
+						object.scale.y = modeles_selectbox.selectedOptions[0].getAttribute("scale");
+						object.scale.z = modeles_selectbox.selectedOptions[0].getAttribute("scale");
 
-				scene.remove(scene.getObjectByName("model_to_show"))				
-				scene.add( object );
-			},
-			onProgress, onError );
+
+						object.name = "model_to_show";
+
+						scene.remove(scene.getObjectByName("model_to_show"))				
+						scene.add( object );
+					},
+					onProgress, onError );
+				break;
+			case "OBJ":
+				break;
+			default:
+			console.log("undefined way to deal with the modele");
+		}		
 	})
 
-	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader(manager) );
+	// THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader(manager) );
+	// I cannot understand why it is here, but I think it is better to keep it here for a while until I figured out whether it is necessary
 
 	var loader = new THREE.OBJMTLLoader(manager);
-	loader.load( '/assets/models/'+modeles_selectbox.selectedOptions[0].getAttribute("path")+'.obj',
-		'/assets/models/'+modeles_selectbox.selectedOptions[0].getAttribute("path")+'.mtl',
-		function ( object ) {
-			object.scale.x = modeles_selectbox.selectedOptions[0].getAttribute("scale");
-			object.scale.y = modeles_selectbox.selectedOptions[0].getAttribute("scale");
-			object.scale.z = modeles_selectbox.selectedOptions[0].getAttribute("scale");
-			object.name = "model_to_show";
-			scene.add( object );
-		},
-		onProgress, onError );
+	switch(modeles_selectbox.selectedOptions[0].getAttribute("type")){
+		case "OBJMTL":
+			var loader = new THREE.OBJMTLLoader(manager);
+			loader.load( '/assets/models/'+modeles_selectbox.selectedOptions[0].getAttribute("path")+'.obj',
+				'/assets/models/'+modeles_selectbox.selectedOptions[0].getAttribute("path")+'.mtl',
+				function ( object ) {
+					object.scale.x = modeles_selectbox.selectedOptions[0].getAttribute("scale");
+					object.scale.y = modeles_selectbox.selectedOptions[0].getAttribute("scale");
+					object.scale.z = modeles_selectbox.selectedOptions[0].getAttribute("scale");
+					object.name = "model_to_show";
+
+					scene.remove(scene.getObjectByName("model_to_show"))				
+					scene.add( object );
+				},
+				onProgress, onError );
+			break;
+		case "OBJ":
+			break;
+		default:
+		console.log("undefined way to deal with the modele");
+	}
+
 
 	// var loader = new THREE.OBJMTLLoader(manager);
-	// loader.load( '/assets/models/models_for_test/Lol_Katarina_Default/Lol_Katarina_Default.obj',
-	// 	'/assets/models/models_for_test/Lol_Katarina_Default/Lol_Katarina_Default.mtl',
-	// 	function ( object ) {
-	// 		object.scale.x = 2;
-	// 		object.scale.y = 2;
-	// 		object.scale.z = 2;
-	// 		object.name = "lol";
-	// 		scene.add( object );
-	// 	},
-	// 	onProgress, onError );
+	
+	// 		var loader = new THREE.OBJLoader(manager);
+	// 		loader.load( '/assets/models/models_for_test/Lol_Katarina_Default/Lol_Katarina_Default.obj',
+	// 			function ( object ) {
+	// 				object.scale.x = 2;
+	// 				object.scale.y = 2;
+	// 				object.scale.z = 2;
+	// 				object.name = "model_to_show";
 
-	// var loader = new THREE.OBJMTLLoader(manager);
-	// loader.load( '/assets/models/models_for_test/Gemini/Gemini.obj',
-	// 	'/assets/models/models_for_test/Gemini/Gemini.mtl',
-	// 	function ( object ) {
-	// 		object.scale.x = 6;
-	// 		object.scale.y = 6;
-	// 		object.scale.z = 6;
-	// 		object.name = "Gemini";
-	// 		scene.add( object );
-	// 	},
-	// 	onProgress, onError );
-
-				// to delete a certain model
-				// scene.remove(scene.getObjectByName("lol"))
-
+	// 				scene.remove(scene.getObjectByName("model_to_show"))				
+	// 				scene.add( object );
+	// 			},
+	// 			onProgress, onError );
 
 	// renderer
 	canvas_to_render = document.getElementById('canvas_for_three');
 
 	renderer = new THREE.WebGLRenderer( { canvas: canvas_to_render, antialias: true } );
 
-	renderer.setClearColor( 0x8888ff );
+	// renderer.setClearColor( 0x8888ff );
+	renderer.setClearColor( 0x222222 );
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( canvas_to_render.scrollWidth, canvas_to_render.scrollHeight, false);
+	renderer.shadowMapEnabled = true;
+	renderer.shadowMapSoft = true;
+	renderer.shadowMapType = THREE.PCFSoftShadowMap;
+
+
+
+
+
+
 
 	camera = new THREE.PerspectiveCamera( 30, renderer.domElement.width / renderer.domElement.height , 1, 10000 );
 	camera.position.z = 30;

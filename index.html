@@ -18,6 +18,8 @@
         <script src="/threejs/js/loaders/MTLLoader.js"></script>
 
 
+
+
     </head>
 
     <body>
@@ -27,14 +29,16 @@
             
 
             <select id = "models_selector" name = "selector_for_models">
-                <option path = "models_for_test/Lol_Katarina_Default/Lol_Katarina_Default" scale = 2 selected="selected">lol</option>
-                <option path = "models_for_test/Gemini/Gemini" scale = 6 >Gemini</option>
+                <option path = "models_for_test/Lol_Katarina_Default/Lol_Katarina_Default" type = "OBJMTL" scale = 2 selected="selected">lol</option>
+                <option path = "models_for_test/Gemini/Gemini" type = "OBJMTL" scale = 6 >Gemini</option>
             </select>
 
             <!-- <p><input id="slider slider_for_model" type="range" min="0" max="3" value="1" step="1"/>model</p>
             <p><input id="slider slider_for_texture" type="range" min="0" max="3" value="1" step="1"/>texture</p> -->
-            <script src="/javascript/suit_on_web_main.js"></script>
+            <script src="/javascript/create_scene_for_suit.js"></script>
 
+            <script src="/javascript/suit_on_web_main.js"></script>
+            
         </div>      
     </body>
 
