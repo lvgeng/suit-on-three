@@ -4,6 +4,8 @@ var container, stats;
 // var modeles_selectbox;
 var camera, controls, scene, renderer;
 
+var selectbox_button_style, selectbox_back_bottom, selectbox_collar_style, selectbox_pocket_style;
+
 init();
 animate();
 
@@ -15,6 +17,11 @@ function animate() {
 }
 
 function init() {
+	selectbox_button_style = document.getElementById("selectbox_button_style");
+	selectbox_back_bottom = document.getElementById("selectbox_back_bottom");
+	selectbox_collar_style = document.getElementById("selectbox_collar_style");
+	selectbox_pocket_style = document.getElementById("selectbox_pocket_style");
+
 	scene = create_scene_basic();
 
 	var manager = new THREE.LoadingManager();
