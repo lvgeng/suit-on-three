@@ -25,12 +25,42 @@
     <body>
         <div id = "container_for_three">
 
-            <canvas id = "canvas_for_three"></canvas> 
-            
+            <canvas id = "canvas_for_three"></canvas>            
 
-            <select id = "models_selector" name = "selector_for_models">
+            <!-- <select id = "models_selector" name = "selector_for_models">
                 <option path = "models_for_test/Lol_Katarina_Default/Lol_Katarina_Default" type = "OBJMTL" scale = 2 selected="selected">lol</option>
                 <option path = "models_for_test/Gemini/Gemini" type = "OBJMTL" scale = 6 >Gemini</option>
+            </select> -->
+
+            <p>button style</p>
+            <select id = "selectbox_button_style" name = "selectbox_button_style">
+                <option value = "single-breasted_1" model = "single-breasted_1">single-breasted 1 button </option>
+                <option value = "single-breasted_2" model = "single-breasted_2">single-breasted 2 buttons</option>
+                <option value = "single-breasted_3" model = "single-breasted_3">single-breasted 3 buttons</option>
+
+                <option value = "double-breasted_2" model = "double-breasted_2">double-breasted 2 buttons</option>
+                <option value = "double-breasted_4" model = "double-breasted_4">double-breasted 4 buttons</option>
+                <option value = "double-breasted_6" model = "double-breasted_6">double-breasted 6 buttons</option>
+            </select>
+
+            <p>back bottom</p>
+            <select id = "selectbox_back_bottom" name = "selectbox_back_bottom">
+                <option value = "back" model = "back">back</option>
+                <option value = "side" model = "side">side</option>
+                <option value = "none" model = "none">none</option>
+            </select>
+
+            <p>collar style</p>
+            <select id = "selectbox_collar_style" name = "selectbox_collar_style">
+                <option value = "notch_lapel" model = "notch_lapel">notch lapel</option>
+                <option value = "peaked_lapel" model = "peaked_lapel">peaked lapel</option>
+            </select>
+
+            <p>pocket style</p>
+            <select id = "selectbox_pocket_style" name = "selectbox_pocket_style">
+                <option value = "ordinary" model = "ordinary">ordinary</option>
+                <option value = "lean" model = "lean">lean</option>
+                <option value = "two_horn" model = "two_horn">two horn</option>
             </select>
 
             <!-- <p><input id="slider slider_for_model" type="range" min="0" max="3" value="1" step="1"/>model</p>
