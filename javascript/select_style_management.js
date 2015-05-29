@@ -42,20 +42,40 @@ function selectbox_update(){
 }
 
 function style_selector_event_manage_enable(){
-	selectbox_button_style.addEventListener("change", function(){
-		selectbox_update();
-	})
-	selectbox_back_bottom.addEventListener("change", function(){
-		selectbox_update();
-	})
-	selectbox_collar_style.addEventListener("change", function(){
-		selectbox_update();
-	})
-	selectbox_pocket_style.addEventListener("change", function(){
-		selectbox_update();
-	})
+	select_fabric = document.getElementById("select_fabric");
+	selectbox_button_style = document.getElementById("selectbox_button_style");
+	selectbox_back_bottom = document.getElementById("selectbox_back_bottom");
+	selectbox_collar_style = document.getElementById("selectbox_collar_style");
+	selectbox_pocket_style = document.getElementById("selectbox_pocket_style");	
+
+
+
+	for (var i = 0; i< select_fabric.children.length; i++){
+		select_fabric.children[i].addEventListener("click",function(){
+			select_fabric.setAttribute("selectedfabric", this.getAttribute("fabrictype"));
+			select_fabric.setAttribute("selectedfabricid", this.getAttribute("id"));
+		});
+	}
+
+		selectbox_button_style.addEventListener("change", function(){
+			selectbox_update();
+		});
+		selectbox_back_bottom.addEventListener("change", function(){
+			selectbox_update();
+		});
+		selectbox_collar_style.addEventListener("change", function(){
+			selectbox_update();
+		});
+		selectbox_pocket_style.addEventListener("change", function(){
+			selectbox_update();
+		});
 }
 
 function select_button_init(){
 	select_fabric = document.getElementById("select_fabric");
+
+	select_fabric.setAttribute("selectedfabric", select_fabric.children[0].getAttribute("fabrictype"));
+	select_fabric.setAttribute("selectedfabricid", select_fabric.children[0].getAttribute("id"));
+
+	console.log("select_button_init");
 }

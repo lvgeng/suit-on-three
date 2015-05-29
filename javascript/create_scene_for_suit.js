@@ -1,3 +1,22 @@
+function create_manager_for_loading(){
+	var manager_for_loading = new THREE.LoadingManager();
+	manager_for_loading.onProgress = function ( item, loaded, total ) {
+		console.log( item, loaded, total );
+	};
+
+	return manager_for_loading;
+}
+
+var onProgress = function ( xhr ) {
+	if ( xhr.lengthComputable ) {
+		var percentComplete = xhr.loaded / xhr.total * 100;
+		console.log( Math.round(percentComplete, 2) + '% downloaded' );
+	}
+};
+var onError = function ( xhr ) {
+};
+
+
 function create_scene_basic() {
 
 	scene = new THREE.Scene();
@@ -74,4 +93,33 @@ function create_scene_basic() {
 	// scene.add( mesh );
 
 	return scene;
+}
+
+
+function create_renderer(canvas_to_render){
+	var renderer = new THREE.WebGLRenderer( { canvas: canvas_to_render, antialias: true } );
+
+	renderer.setClearColor( 0xcccccc );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( canvas_to_render.scrollWidth, canvas_to_render.scrollHeight, false);
+	renderer.shadowMapEnabled = true;
+	renderer.shadowMapSoft = true;
+	renderer.shadowMapType = THREE.PCFSoftShadowMap;
+
+	return renderer;
+}
+
+function create_camera(controls_for_camera){
+	var camera = new THREE.PerspectiveCamera( 30, renderer.domElement.width / renderer.domElement.height , 1, 10000 );
+	camera.position.z = 30;
+	camera.position.y = 10;
+	return camera;
+}
+
+function creat_controls_for_camera(camera, canvas_to_render){
+	var controls = new THREE.OrbitControls( camera, renderer.domElement);
+	controls.target = new THREE.Vector3(0,7,0);
+	controls.damping = 0.2;
+
+	return controls;
 }
