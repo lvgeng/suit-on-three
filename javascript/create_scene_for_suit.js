@@ -7,47 +7,23 @@ function create_manager_for_loading(){
 	return manager_for_loading;
 }
 
-var onProgress = function ( xhr ) {
-	if ( xhr.lengthComputable ) {
-		var percentComplete = xhr.loaded / xhr.total * 100;
-		console.log( Math.round(percentComplete, 2) + '% downloaded' );
-	}
-};
-var onError = function ( xhr ) {
-};
-
+// var onProgress = function ( xhr ) {
+// 	if ( xhr.lengthComputable ) {
+// 		var percentComplete = xhr.loaded / xhr.total * 100;
+// 		console.log( Math.round(percentComplete, 2) + '% downloaded' );
+// 	}
+// };
+// var onError = function ( xhr ) {
+// };
 
 function create_scene_basic() {
 
 	scene = new THREE.Scene();
-	// scene.fog = new THREE.Fog( 0xcce0ff, 50, 500 );
 
 	var light = new THREE.AmbientLight( 0xffffff);
 	light.name = "ambientlight";
 	scene.add( light );
 	
-	// light = new THREE.DirectionalLight( 0xdfebff, 1.00 );
-	// light.position.set( 50, 200, 100 );
-	// light.position.multiplyScalar( 1.0 );
-
-	// light.castShadow = true;
-	// light.shadowCameraVisible = true;
-
-	// light.shadowMapWidth = 1024;
-	// light.shadowMapHeight = 1024;
-
-	// var d = 300;
-
-	// light.shadowCameraLeft = -d;
-	// light.shadowCameraRight = d;
-	// light.shadowCameraTop = d;
-	// light.shadowCameraBottom = -d;
-
-	// light.shadowCameraFar = 1000;
-	// light.shadowDarkness = 0.5;
-
-	// scene.add( light );
-//======================================================================================================
 	// Grid
 
 	var line_material = new THREE.LineBasicMaterial( { color: 0x999999 } ),
@@ -65,32 +41,6 @@ function create_scene_basic() {
 
 	var line = new THREE.Line( geometry, line_material, THREE.LinePieces );
 	scene.add( line );
-
-//===================================================================
-	//white ground
-	// var groundMaterial = new THREE.MeshPhongMaterial({
-	// 	color: 0xeeeeee,
-	// 	shading: THREE.SmoothShading,
-	// });
-	// ground = new THREE.Mesh( new THREE.PlaneBufferGeometry(128, 128), groundMaterial);
-
-	// ground.receiveShadow = true;
-	// ground.rotation.x = -Math.PI / 2;
-	// scene.add(ground);
-//====================================================================
-	//texture-ground
-
-	// var groundTexture = THREE.ImageUtils.loadTexture( "/assets/textures/grasslight-big.jpg" );
-	// groundTexture.wrapS = groundTexture.wrapT = THREE.RepeatWrapping;
-	// groundTexture.repeat.set( 25, 25 );
-	// groundTexture.anisotropy = 16;
-	// var groundMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff, specular: 0x111111, map: groundTexture } );
-	// var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 200, 200 ), groundMaterial );
-	// mesh.position.y = 0;
-	// mesh.rotation.x = - Math.PI / 2;
-	// mesh.receiveShadow = true;
-	// mesh.name = "ground";
-	// scene.add( mesh );
 
 	return scene;
 }
@@ -110,16 +60,41 @@ function create_renderer(canvas_to_render){
 }
 
 function create_camera(controls_for_camera){
-	var camera = new THREE.PerspectiveCamera( 30, renderer.domElement.width / renderer.domElement.height , 1, 10000 );
-	camera.position.z = 30;
-	camera.position.y = 10;
+	var camera = new THREE.PerspectiveCamera( 30, renderer.domElement.width / renderer.domElement.height , 1, 1000 );
+	camera.position.z = 15;
+	camera.position.y = 5;
 	return camera;
 }
 
 function creat_controls_for_camera(camera, canvas_to_render){
 	var controls = new THREE.OrbitControls( camera, renderer.domElement);
-	controls.target = new THREE.Vector3(0,7,0);
+	controls.target = new THREE.Vector3(0,3.5,0);
 	controls.damping = 0.2;
 
 	return controls;
 }
+
+
+function update_suit_model(model_name,scene, manager_for_loading, path_OBJ, Path_MTL){
+	var loader = new THREE.OBJMTLLoader(manager_for_loading);
+	// var loader = new THREE.OBJMTLLoader(manager_for_loading);
+	loader.load( path_OBJ, Path_MTL,
+		function ( suit_main_loaded ) {
+			// suit_main_loaded.scale.x = 2;
+			// suit_main_loaded.scale.y = 2;
+			// suit_main_loaded.scale.z = 2;
+			suit_main_loaded.name = model_name;
+			scene.remove(scene.getObjectByName(model_name));
+			scene.add( suit_main_loaded );
+		},
+		function ( xhr ) {
+			if ( xhr.lengthComputable ) {
+				var percentComplete = xhr.loaded / xhr.total * 100;
+				console.log( Math.round(percentComplete, 2) + '% downloaded' );
+			}
+		},
+		function ( xhr ) {
+		} );
+}
+
+	
