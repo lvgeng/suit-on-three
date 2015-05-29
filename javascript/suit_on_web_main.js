@@ -5,6 +5,7 @@ var container, stats;
 var camera, controls, scene, renderer;
 
 var selectbox_button_style, selectbox_back_bottom, selectbox_collar_style, selectbox_pocket_style;
+var select_fabric;
 
 init();
 animate();
@@ -16,12 +17,9 @@ function animate() {
 	render();
 }
 
-function init() {
-	selectbox_button_style = document.getElementById("selectbox_button_style");
-	selectbox_back_bottom = document.getElementById("selectbox_back_bottom");
-	selectbox_collar_style = document.getElementById("selectbox_collar_style");
-	selectbox_pocket_style = document.getElementById("selectbox_pocket_style");
-
+function init() {	
+	selectbox_init();
+	select_button_init();
 	scene = create_scene_basic();
 
 	var manager = new THREE.LoadingManager();
@@ -36,7 +34,6 @@ function init() {
 	};
 	var onError = function ( xhr ) {
 	};
-
 
 	// // model
 	// // var loader = new THREE.OBJLoader( manager );
@@ -128,7 +125,6 @@ function init() {
 
 	renderer = new THREE.WebGLRenderer( { canvas: canvas_to_render, antialias: true } );
 
-	// renderer.setClearColor( 0x8888ff );
 	renderer.setClearColor( 0xcccccc );
 	renderer.setPixelRatio( window.devicePixelRatio );
 	renderer.setSize( canvas_to_render.scrollWidth, canvas_to_render.scrollHeight, false);
@@ -148,10 +144,12 @@ function init() {
 	controls.addEventListener( 'change', render );
 
 	window.addEventListener( 'resize', onWindowResize, false );
+	style_selector_event_manage_enable();
+
+	
 
 	animate();
 }
-
 
 function onWindowResize() {
 

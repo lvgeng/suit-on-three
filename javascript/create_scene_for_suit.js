@@ -3,7 +3,6 @@ function create_scene_basic() {
 	scene = new THREE.Scene();
 	// scene.fog = new THREE.Fog( 0xcce0ff, 50, 500 );
 
-
 	var light = new THREE.AmbientLight( 0xffffff);
 	light.name = "ambientlight";
 	scene.add( light );
@@ -29,7 +28,6 @@ function create_scene_basic() {
 	// light.shadowDarkness = 0.5;
 
 	// scene.add( light );
-
 //======================================================================================================
 	// Grid
 
@@ -44,12 +42,10 @@ function create_scene_basic() {
 
 		geometry.vertices.push( new THREE.Vector3( i * step - 100, floor, -100 ) );
 		geometry.vertices.push( new THREE.Vector3( i * step - 100, floor,  100 ) );
-
 	}
 
 	var line = new THREE.Line( geometry, line_material, THREE.LinePieces );
 	scene.add( line );
-
 
 //===================================================================
 	//white ground
