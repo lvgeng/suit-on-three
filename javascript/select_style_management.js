@@ -54,20 +54,30 @@ function style_selector_event_manage_enable(){
 		select_fabric.children[i].addEventListener("click",function(){
 			select_fabric.setAttribute("selectedfabric", this.getAttribute("fabrictype"));
 			select_fabric.setAttribute("selectedfabricid", this.getAttribute("id"));
+
+			update_fabric();
 		});
 	}
 
 		selectbox_button_style.addEventListener("change", function(){
 			selectbox_update();
+			
+			update_suit_main();
 		});
 		selectbox_back_bottom.addEventListener("change", function(){
 			selectbox_update();
+
+			update_suit_main();
 		});
 		selectbox_collar_style.addEventListener("change", function(){
 			selectbox_update();
+
+			update_suit_collar();
 		});
 		selectbox_pocket_style.addEventListener("change", function(){
 			selectbox_update();
+
+			update_suit_pocket();
 		});
 }
 
