@@ -37,9 +37,9 @@ function init() {
 	style_selector_event_manage_enable();
 	window.addEventListener( 'resize', onWindowResize, false );
 
-	update_suit_main();
-	update_suit_collar();
-	update_suit_pocket();
+	update_suit_main(scene, manager_for_loading);
+	// update_suit_collar(scene, manager_for_loading);
+	update_suit_pocket(scene, manager_for_loading);
 
 
 	update_suit_model("suit_main", 

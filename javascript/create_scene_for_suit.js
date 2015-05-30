@@ -63,7 +63,7 @@ function creat_controls_for_camera(camera, canvas_to_render){
 	controls.minPolarAngle = Math.PI/13*6; // radians
 	controls.maxPolarAngle = Math.PI/13*7; // radians
 
-	controls.autoRotate = true;
+	controls.autoRotate = false;
 	controls.autoRotateSpeed = 2.0;
 
 	controls.damping = 0.2;
@@ -93,7 +93,7 @@ function update_suit_model(model_name,scene, manager_for_loading, path_OBJ, Path
 // var selectbox_button_style, selectbox_back_bottom, selectbox_collar_style, selectbox_pocket_style;
 // var select_fabric;
 
-function update_suit_main(){
+function update_suit_main(scene, manager_for_loading){
 	var suit_main_name = selectbox_button_style.value+'_'+selectbox_back_bottom.value;
 	var selected_fabric = select_fabric.getAttribute("selectedfabric");
 	var path_OBJ_suit_main = "/assets/suit_main/" + suit_main_name + '/' + suit_main_name +'.obj';
@@ -107,7 +107,7 @@ function update_suit_main(){
 }
 
 //==============================================unfinished!!!!!!!!!!=================================================================
-function update_suit_collar(){
+function update_suit_collar(scene, manager_for_loading){
 	var suit_button_style_name = selectbox_button_style.value;
 	var suit_collar_name = suit_button_style_name + '_' + selectbox_collar_style.value;
 	var selected_fabric = select_fabric.getAttribute("selectedfabric");
@@ -121,7 +121,7 @@ function update_suit_collar(){
 }
 //==============================================================================================================
 
-function update_suit_pocket(){
+function update_suit_pocket(scene, manager_for_loading){
 	var suit_pocket_name = selectbox_pocket_style.value;
 	var selected_fabric = select_fabric.getAttribute("selectedfabric");
 	var path_OBJ_suit_pocket = "/assets/suit_pocket/" + suit_pocket_name + '/' + suit_pocket_name +'.obj';
@@ -133,10 +133,10 @@ function update_suit_pocket(){
 	// update_suit_model("suit_pocket", scene, manager_for_loading, path_OBJ_suit_pocket, path_MTL_suit_pocket);
 }
 
-function update_fabric(){
-	update_suit_main();
+function update_fabric(scene, manager_for_loading){
+	update_suit_main(scene, manager_for_loading);
 	// update_suit_collar();
-	update_suit_pocket();
+	update_suit_pocket(scene, manager_for_loading);
 }
 
 	
