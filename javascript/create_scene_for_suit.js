@@ -58,6 +58,14 @@ function create_camera(controls_for_camera){
 function creat_controls_for_camera(camera, canvas_to_render){
 	var controls = new THREE.OrbitControls( camera, renderer.domElement);
 	controls.target = new THREE.Vector3(0,3.5,0);
+	controls.noZoom = true;
+	controls.noPan = true;
+	controls.minPolarAngle = Math.PI/13*6; // radians
+	controls.maxPolarAngle = Math.PI/13*7; // radians
+
+	controls.autoRotate = true;
+	controls.autoRotateSpeed = 2.0;
+
 	controls.damping = 0.2;
 
 	return controls;
