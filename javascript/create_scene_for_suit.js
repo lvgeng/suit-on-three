@@ -99,8 +99,8 @@ function update_suit_main(){
 	var path_OBJ_suit_main = "/assets/suit_main/" + suit_main_name + '/' + suit_main_name +'.obj';
 	var path_MTL_suit_main = "/assets/suit_main/" + suit_main_name + '/' + suit_main_name + '_' + selected_fabric + '.mtl';
 
-	console.log("OBJ" + path_OBJ_suit_main);
-	console.log("MTL" + path_MTL_suit_main);
+	console.log("OBJ: " + path_OBJ_suit_main);
+	console.log("MTL: " + path_MTL_suit_main);
 
 	// update_suit_model("suit_main", scene, manager_for_loading, path_OBJ_suit_main, path_MTL_suit_main);
 	update_suit_collar();
@@ -111,31 +111,31 @@ function update_suit_collar(){
 	var suit_button_style_name = selectbox_button_style.value;
 	var suit_collar_name = suit_button_style_name + '_' + selectbox_collar_style.value;
 	var selected_fabric = select_fabric.getAttribute("selectedfabric");
-	var path_OBJ_suit_collar = "/assets/suit_main/" + suit_collar_name + '/' + suit_collar_name +'.obj';
-	var path_MTL_suit_collar = "/assets/suit_main/" + suit_collar_name + '/' + suit_collar_name + '_' + selected_fabric + '.mtl';
+	var path_OBJ_suit_collar = "/assets/suit_collar/" + suit_collar_name + '/' + suit_collar_name +'.obj';
+	var path_MTL_suit_collar = "/assets/suit_collar/" + suit_collar_name + '/' + suit_collar_name + '_' + selected_fabric + '.mtl';
 
-	console.log("OBJ" + path_OBJ_suit_collar);
-	console.log("MTL" + path_MTL_suit_collar);
+	console.log("OBJ: " + path_OBJ_suit_collar);
+	console.log("MTL: " + path_MTL_suit_collar);
 
 	// update_suit_model("suit_collar", scene, manager_for_loading, path_OBJ_suit_collar, path_MTL_suit_collar);
 }
 //==============================================================================================================
 
 function update_suit_pocket(){
-	var suit_pocket_name = selectbox_collar_style.value;
+	var suit_pocket_name = selectbox_pocket_style.value;
 	var selected_fabric = select_fabric.getAttribute("selectedfabric");
-	var path_OBJ_suit_pocket = "/assets/suit_main/" + suit_pocket_name + '/' + suit_pocket_name +'.obj';
-	var path_MTL_suit_pocket = "/assets/suit_main/" + suit_pocket_name + '/' + suit_pocket_name + '_' + selected_fabric + '.mtl';
+	var path_OBJ_suit_pocket = "/assets/suit_pocket/" + suit_pocket_name + '/' + suit_pocket_name +'.obj';
+	var path_MTL_suit_pocket = "/assets/suit_pocket/" + suit_pocket_name + '/' + suit_pocket_name + '_' + selected_fabric + '.mtl';
 
-	console.log("OBJ" + path_OBJ_suit_pocket);
-	console.log("MTL" + path_MTL_suit_pocket);
+	console.log("OBJ: " + path_OBJ_suit_pocket);
+	console.log("MTL: " + path_MTL_suit_pocket);
 
 	// update_suit_model("suit_pocket", scene, manager_for_loading, path_OBJ_suit_pocket, path_MTL_suit_pocket);
 }
 
 function update_fabric(){
 	update_suit_main();
-	update_suit_collar();
+	// update_suit_collar();
 	update_suit_pocket();
 }
 
